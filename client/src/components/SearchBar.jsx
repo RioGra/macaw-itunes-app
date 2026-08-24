@@ -25,9 +25,27 @@ function SearchBar({ onSearch }) {
 					value={term}
 					onChange={(e) => setTerm(e.target.value)}
 				/>
-
-				{/* Media type dropdown */}
-				<select
+{/* Media type custom dropdown */}
+<div className="dropdown">
+  <button
+    className="btn btn-secondary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+  >
+    {media === 'all' ? 'All' : media.charAt(0).toUpperCase() + media.slice(1)}
+  </button>
+  <ul className="dropdown-menu dropdown-menu-dark">
+    {['all','music','movie','podcast','audiobook','shortFilm','tvShow','software','ebook'].map((type) => (
+      <li key={type}>
+        <button className="dropdown-item" type="button" onClick={() => setMedia(type)}>
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
+				
+				{/* <select
 					className="form-select"
 					value={media}
 					onChange={(e) => setMedia(e.target.value)}
@@ -41,7 +59,7 @@ function SearchBar({ onSearch }) {
 					<option value="tvShow">TV Show</option>
 					<option value="software">Software</option>
 					<option value="ebook">Ebook</option>
-				</select>
+				</select> */}
 
 				{/* Search button */}
 				<button

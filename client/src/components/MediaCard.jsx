@@ -13,16 +13,16 @@ function MediaCard({ item, onAddFavourite, isFavourite }) {
 
 			<div className="card-body d-flex flex-column">
 				{/* Track and album info */}
+				<p className="card-artist">{item.artistName}</p>
 				<h6 className="card-title">{item.trackName || item.albumName}</h6>
-				<p className="card-text text-muted mb-1">{item.artistName}</p>
-				<p className="card-text text-muted mb-1">{item.albumName}</p>
+				<p className="card-album">{item.albumName}</p>
 				<p className="card-text small text-muted">
 					{item.releaseDate ? new Date(item.releaseDate).getFullYear() : ""}
 				</p>
 
 				{/* Add to favourite button */}
 				<button
-					className={`btn mt-auto ${isFavourite ? "btn-danger" : "btn-outline-danger"}`}
+					className={`btn mt-auto btn-fav ${isFavourite ? "active" : ""}`}
 					onClick={() => onAddFavourite(item)}
 				>
 					<i className={`bi ${isFavourite ? "bi-heart-fill" : "bi-heart"}`}></i>

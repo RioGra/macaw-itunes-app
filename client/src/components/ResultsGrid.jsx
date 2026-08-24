@@ -1,14 +1,34 @@
 import MediaCard from "./MediaCard";
 
 //Displays results grid, loading state, and empty state
-function ResultsGrid({ results, loading, onAddFavourite, favourites }) {
-	if (loading) return <p className="text-center mt-4">Loading...</p>;
+function ResultsGrid({ results, loading, onAddFavourite, favourites, hasSearched }) {
+if (loading) return (
+  <div className="container mt-4">
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      {[...Array(8)].map((_, i) => (
+        <div className="col" key={i}>
+          <div className="card h-100">
+            <div className="skeleton skeleton-img"></div>
+            <div className="card-body">
+              <div className="skeleton skeleton-text"></div>
+              <div className="skeleton skeleton-text short"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
-	if (results.length === 0)
+	if (results.length === 0 && !hasSearched)
 		return (
-			<p className="text-center mt-4">
-				Search for music, movies, podcasts and more...
+			<p className="text-center empty-state">
+				Discover Music, Movies, Podcasts, Audiobooks and more...
 			</p>
+		);
+	if (results.length === 0 && hasSearched)
+		return (
+			<p className="text-center empty-state">No results found - try a different search</p>
 		);
 
 	return (

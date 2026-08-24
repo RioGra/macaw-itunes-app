@@ -17,6 +17,8 @@ const searchItunes = async (term, media = "all") => {
 		params: { term, media },
 		headers: { Authorization: `Bearer ${token}` },
 	});
+	//** Test delay ** to simulate network latency for loading state demonstration
+	await new Promise((resolve) => setTimeout(resolve, 2000));
 	return response.data.results;
 };
 

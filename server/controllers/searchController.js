@@ -18,7 +18,7 @@ const searchItunes = async (req, res) => {
 			trackName: item.trackName,
 			albumName: item.collectionName,
 			artistName: item.artistName,
-			albumCover: item.artworkUrl100,
+			albumCover: item.artworkUrl100?.replace('100x100', '600x600'),
 			releaseDate: item.releaseDate,
 
 			// iTunes API returns different types of media (music, movies, etc.),

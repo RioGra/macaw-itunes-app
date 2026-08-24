@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar";
 import ResultsGrid from "./components/ResultsGrid";
 import FavouritesDrawer from "./components/FavouritesDrawer";
+import Footer from "./components/Footer";
 
 // Main App component
 function App() {
@@ -14,6 +15,7 @@ function App() {
 	const [loading, setLoading] = useState(false); // is a search in progress?
 	const [error, setError] = useState(null); // did something go wrong during search ?
 	const [showDrawer, setShowDrawer] = useState(false); // is the favourites drawer open?
+	const [hasSearched, setHasSearched] = useState(false); // has the user performed a search yet?
 
 	// Function to handle search requests to the iTunes API
 	const handleSearch = async (term, media) => {
@@ -22,6 +24,7 @@ function App() {
 		try {
 			const data = await searchItunes(term, media);
 			setResults(data);
+			setHasSearched(true);
 		} catch (error) {
 			setError("Something went wrong. Please try again.");
 		} finally {
@@ -48,18 +51,25 @@ function App() {
 				onToggleDrawer={() => setShowDrawer(true)}
 			/>
 			<SearchBar onSearch={handleSearch} />
-			<ResultsGrid
-				results={results}
-				loading={loading}
-				onAddFavourite={addFavourite}
-				favourites={favourites}
-			/>
+			{error && (
+				<div className="error-state text-center">
+					<i className="bi bi-exclamation-triangle-fill"></i> {error}
+				</div>
+			)}
 			<FavouritesDrawer
 				favourites={favourites}
 				onRemoveFavourite={removeFavourite}
 				show={showDrawer}
 				onClose={() => setShowDrawer(false)}
 			/>
+			<ResultsGrid
+				results={results}
+				loading={loading}
+				onAddFavourite={addFavourite}
+				favourites={favourites}
+				hasSearched={hasSearched}
+			/>
+			<Footer />
 		</div>
 	);
 }
