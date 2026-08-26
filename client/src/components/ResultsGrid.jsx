@@ -1,7 +1,7 @@
 import MediaCard from "./MediaCard";
 
 //Displays results grid, loading state, and empty state
-function ResultsGrid({ results, loading, onAddFavourite, favourites, hasSearched }) {
+function ResultsGrid({ results, loading, onAddFavourite, favourites, hasSearched, onPlay }) {
 if (loading) return (
   <div className="container mt-4">
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -42,9 +42,8 @@ if (loading) return (
 						<MediaCard
 							item={item}
 							onAddFavourite={onAddFavourite}
-							isFavourite={favourites.some(
-								(fav) => fav.trackId === item.trackId,
-							)}
+							isFavourite={favourites.some((fav) => fav.trackId === item.trackId)}
+							onPlay={onPlay}
 						/>
 					</div>
 				))}

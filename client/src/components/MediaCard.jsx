@@ -1,22 +1,29 @@
 import { useState } from "react";
 
 //Display a single media card with add/remove favourite button
-function MediaCard({ item, onAddFavourite, isFavourite }) {
+function MediaCard({ item, onAddFavourite, isFavourite, onPlay }) {
 	return (
 		<div className="card h-100">
 			{/* Album cover image */}
 			<img
 				src={item.albumCover}
-				alt={item.albumName}
+				alt={item.albumName || item.artistName || 'Album artwork'}
+			
 				className="card-img-top"
 			/>
-
+{/* Preview play button — only shown if preview is available */}
+{item.previewUrl && (
+  <div className="preview-badge" onClick={() => onPlay(item)}>
+    <i className="bi bi-play-circle-fill"></i>
+    <span>Preview</span>
+  </div>
+)}
 			<div className="card-body d-flex flex-column">
 				{/* Track and album info */}
 				<p className="card-artist">{item.artistName}</p>
 				<h6 className="card-title">{item.trackName || item.albumName}</h6>
 				<p className="card-album">{item.albumName}</p>
-				<p className="card-text small text-muted">
+				<p className="card-year">
 					{item.releaseDate ? new Date(item.releaseDate).getFullYear() : ""}
 				</p>
 

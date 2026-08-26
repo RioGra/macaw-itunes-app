@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar";
 import ResultsGrid from "./components/ResultsGrid";
 import FavouritesDrawer from "./components/FavouritesDrawer";
+import FavouritesPanel from "./components/FavouritesPanel";
+import AudioPlayer from "./components/AudioPlayer";
 import Footer from "./components/Footer";
 
 // Main App component
@@ -16,6 +18,7 @@ function App() {
 	const [error, setError] = useState(null); // did something go wrong during search ?
 	const [showDrawer, setShowDrawer] = useState(false); // is the favourites drawer open?
 	const [hasSearched, setHasSearched] = useState(false); // has the user performed a search yet?
+	const [currentTrack, setCurrentTrack] = useState(null); // currently playing track
 
 	// Function to handle search requests to the iTunes API
 	const handleSearch = async (term, media) => {
@@ -43,35 +46,66 @@ function App() {
 	const removeFavourite = (trackId) => {
 		setFavourites(favourites.filter((fav) => fav.trackId !== trackId));
 	};
+
+// Sets the current track to play — clicking same track toggles play/pause
+const handlePlay = (track) => {
+  setCurrentTrack(track)
+}
+
 	// Render the main App component
 	return (
-		<div>
+		<div className="app-wrapper">
 			<NavBar
 				favouriteCount={favourites.length}
 				onToggleDrawer={() => setShowDrawer(true)}
 			/>
+			 <main className="app-main">
 			<SearchBar onSearch={handleSearch} />
 			{error && (
 				<div className="error-state text-center">
 					<i className="bi bi-exclamation-triangle-fill"></i> {error}
 				</div>
 			)}
-			<FavouritesDrawer
-				favourites={favourites}
-				onRemoveFavourite={removeFavourite}
-				show={showDrawer}
-				onClose={() => setShowDrawer(false)}
-			/>
-			<ResultsGrid
-				results={results}
-				loading={loading}
-				onAddFavourite={addFavourite}
-				favourites={favourites}
-				hasSearched={hasSearched}
-			/>
-			<Footer />
-		</div>
+			<div className="container-fluid px-3">
+      <div className="row g-3 px-3">
+        {/* Results grid — full width on mobile, 8 cols on desktop */}
+        <div className="col-12 col-lg-8">
+          <ResultsGrid
+            results={results}
+            loading={loading}
+            onAddFavourite={addFavourite}
+            favourites={favourites}
+            hasSearched={hasSearched}
+			onPlay={handlePlay}
+          />
+        </div>
+		   {/* Favourites panel — desktop only */}
+        <div className="col-lg-4 d-none d-lg-block">
+          <FavouritesPanel
+            favourites={favourites}
+            onRemoveFavourite={removeFavourite}
+          />
+        </div>
+      </div>
+    </div>
+			{/* Favourites drawer - mobile only */}
+			<div className="d-lg-none">
+				<FavouritesDrawer
+					favourites={favourites}
+					onRemoveFavourite={removeFavourite}
+					show={showDrawer}
+					onClose={() => setShowDrawer(false)}
+				/>
+			</div>
+	
+			</main>
+{!currentTrack && <Footer />}
+		
+								<AudioPlayer
+  currentTrack={currentTrack}
+  onClose={() => setCurrentTrack(null)}
+/>
+	</div>
 	);
 }
-
 export default App;

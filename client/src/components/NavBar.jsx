@@ -15,13 +15,10 @@ function NavBar({ favouriteCount, onToggleDrawer }) {
 					className="btn btn-outline-light position-relative"
 					onClick={onToggleDrawer}
 				>
-					<i
-						className="bi bi-heart-fill"
-						style={{ color: "white" }}
-					></i>{" "}
+					<i className="bi bi-heart-fill"></i>{" "}
 					Favourites
 					{favouriteCount > 0 && (
-						<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+						<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" style={{fontSize: '0.65rem'}}>
 							{favouriteCount}
 						</span>
 					)}

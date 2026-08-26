@@ -4,8 +4,8 @@
   --bg-main: #121212;
   --bg-navbar: #2133bb;
   --accent: #2A54FF;
-  --muted: #607BB0;
-  --text: #E9E9E9;
+  --muted: #8899CC;
+  --text: #FFFFFF;
 
 }
 
@@ -24,8 +24,9 @@ body {
   color: var(--text);
   min-height: 100vh;
   margin: 0;
-  padding-bottom: 80px; /* Space for footer */
+
 }
+
 /* ── Navbar ── */
 .navbar {
   background-color: var(--bg-navbar)!important;
@@ -34,10 +35,23 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+/* ── Navbar favourites button ── */
+.navbar .btn {
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  border: none;
+}
+.navbar .btn:hover {
+  background-color: #FFD700;
+  color: #05070F;
+}
+
 /* ── Rounded search elements ── */
 .form-control, .form-select, .btn {
   border-radius: 50px !important;
 }
+
+
 /* ── Empty state message ── */
 .empty-state {
   font-size: 1.2rem;
@@ -77,21 +91,15 @@ body {
 
 /* ── Media type dropdown button ── */
 .btn-secondary {
-  background-color: var(--bg-navbar);
+  background-color: #282828;
   border: none;
-  color: var(--text);
+  color: #FFFFFF;
   min-width: 150px;
 }
 
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
-  background-color: var(--accent);
-  border: none;
-  color: var(--text);
-  box-shadow: 0 0 20px rgba(42, 84, 255, 0.6) !important;
-}
 /* ── Dropdown menu ── */
 .dropdown-menu {
-  background-color: var(--bg-navbar);
+  background-color: #282828;
   border: none;
 }
 
@@ -108,17 +116,17 @@ body {
 .card-img-top {
  width: 100%;
  aspect-ratio: 1/1;
-  object-fit: cover;
+ object-fit: cover;
 }
 
 .card {
-  background-color: #0D1117;
+  background-color: #181818;
   border: none;
   color: var(--text);
-  max-width: 220px;
+  max-width: 320px;
   margin: 0 auto;
-  border-radius: 16px!important;
   overflow: hidden;
+  border-radius: 16px!important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -126,6 +134,7 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 0 30px rgba(42, 84, 255, 0.9), 0 0 60px rgba(0, 30, 255, 0.5);
 }
+
 /* ── Card Typography ── */
 .card-title {
   font-size: 0.95rem;
@@ -143,46 +152,44 @@ body {
 
 .card-album {
   font-size: 0.78rem;
-  color: var(--muted) !important;
+  color: #8899CC !important;
   margin-bottom: 2px;
 }
 
 .card-year {
   font-size: 0.75rem;
-  color: var(--muted) !important;
+  color: #8899CC !important;
 }
 /* ── Inputs ── */
 .form-control, .form-select {
-  background-color: #0D1117;
+  background-color: #282828 !important;
   border: none;
   color: var(--text);
+  color: #FFFFFF !important;
 }
-
+.form-control:hover, .form-select:hover {
+  background-color: #232324 !important;
+  color: var(--text) !important;
+}
 .form-control {
   min-width: 250px;
 }
-/* ── Navbar favourites button ── */
-.navbar .btn {
-  color: #FFD700;
-  border: none;
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.navbar .btn:hover {
-  background-color: #FFD700;
-  color: #05070F;
-}
 
 /* ── Search button ── */
- 
+
 .btn-primary {
-  background-color: var(--bg-navbar);
-  border-color: var(--bg-navbar);
+  background-color: #282828 !important;
+  border: none;
   min-width: 250px;
 }
 
 .btn-primary:hover {
   background-color: var(--accent);
-  border-color: var(--accent);
+  border-color: #535353;
 
 }
 /* ── Favourite button ── */
@@ -200,7 +207,7 @@ body {
 .btn i, .navbar i {
   margin-right: 6px;
 }
-/* ── Favourites Drawer ── */
+/* ── Favourites Drawer MOBILE ── */
 .offcanvas {
   background: rgba(5,7,15,0.85);
   /*background: linear-gradient(135deg, rgba(5, 7, 15, 0.92), rgba(42, 84, 255, 0.08));*/
@@ -216,18 +223,7 @@ body {
 }
 
 /* ── Favourites remove button ── */
-.offcanvas .btn-outline-danger {
-  border-color: #FFD700;
-  color: #FFD700;
-}
-
-.offcanvas .btn-outline-danger:hover {
-  background-color: #FFD700;
-  color: var(--bg-main);
-}
-
 .btn-drawer-close {
-  border-color: #FFD700;
   color: #FFD700;
 }
 
@@ -236,11 +232,125 @@ body {
   background-color: #FFD700;
   color: var(--bg-main);
 }
-/* ── Footer ── */
-.footer {
+/* ── Favourites Panel (desktop) ── */
+.favourites-panel {
+  background: #181818;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: filter 0.3s ease;
+}
+
+.favourites-panel:hover {
+  /*box-shadow: 0 0 20px rgba(42, 84, 255, 0.4); */
+  border-color: var(--accent);
+  filter: brightness(1.1);
+}
+/* audio player */
+
+.audio-player {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  color: #FFD700;
-  font-size: .9rem;
+  background: #181818;
+  border-top: 2px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem 0.25rem;
+  z-index: 1000;
 }
+.audio-player__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+
+.audio-player__artwork {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.audio-player__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.audio-player__track {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audio-player__artist {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.audio-player__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.audio-player__btn {
+  background: none;
+  border: none;
+  color: #FFD700;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.audio-player__time {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.audio-player__close {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.audio-player__close:hover {
+  color: #FFD700;
+}
+.audio-player__footer {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+  padding-bottom: 2px;
+}
+/* app wrapper and main content */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  padding-bottom: 14rem;
+}
+/* ── Footer ── 
+.footer {
+  position: fixed;
+  bottom: 5rem;
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  padding: 0.4rem 1rem;
+  z-index: 997;*/

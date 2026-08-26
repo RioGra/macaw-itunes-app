@@ -18,13 +18,13 @@ const searchItunes = async (req, res) => {
 			trackName: item.trackName,
 			albumName: item.collectionName,
 			artistName: item.artistName,
-			albumCover: item.artworkUrl100?.replace('100x100', '600x600'),
+			albumCover: item.artworkUrl100?.replace("100x100", "600x600"),
 			releaseDate: item.releaseDate,
-
 			// iTunes API returns different types of media (music, movies, etc.),
 			// so need to handle both trackId for songs and collectionId for albums
 			// Use trackId if available, otherwise use collectionId
 			trackId: item.trackId || item.collectionId,
+			previewUrl: item.previewUrl || null,
 		}));
 
 		// Send the mapped results back to the client

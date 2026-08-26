@@ -9,10 +9,11 @@ function FavouritesDrawer({ favourites, onRemoveFavourite, show, onClose }) {
     >
         <div className ="offcanvas-header">
             <h5 className="offcanvas-title">
-            <i className="bi bi-heart-fill text-danger"></i> Favourites ({favourites.length})
+            <i className="bi bi-heart-fill" style={{ color: '#FFD700' }}></i> Favourites ({favourites.length})
             </h5>
         <button className="btn btn-sm btn-drawer-close ms-auto" onClick={onClose}>
             <i className="bi bi-x-lg"></i>
+
         </button>
         </div>
             
@@ -27,9 +28,9 @@ function FavouritesDrawer({ favourites, onRemoveFavourite, show, onClose }) {
                                 <p className="mb-0 small fw-bold">{item.trackName || item.albumName}</p>
                                 <p className="mb-0 small text-muted">{item.artistName}</p>
                             </div>
-                            <button className="btn btn-sm btn-outline-danger" onClick={() => onRemoveFavourite(item.trackId)}>
-                                <i className="bi bi-x"></i>
-                            </button>
+                          <i className="bi bi-x-lg" onClick={() => onRemoveFavourite(item.trackId)}
+  style={{ cursor: 'pointer', color: '#FFD700' }}></i>
+                        
                         </div>
                     ))
               
