@@ -28,7 +28,7 @@ function SearchBar({ onSearch }) {
 {/* Media type custom dropdown */}
 <div className="dropdown">
   <button
-    className="btn btn-secondary dropdown-toggle"
+    className="btn btn-flat dropdown-toggle"
     type="button"
     data-bs-toggle="dropdown"
   >

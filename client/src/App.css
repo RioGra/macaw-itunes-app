@@ -5,7 +5,7 @@
   --bg-navbar: #2133bb;
   --accent: #2A54FF;
   --muted: #8899CC;
-  --text: #FFFFFF;
+  --text: #e7e6e6;
 
 }
 
@@ -13,6 +13,7 @@
 * {
   font-family: 'Inter', sans-serif;
   box-sizing: border-box;
+  font-weight: 300 !important;
 }
 *:focus {
   outline: none !important;
@@ -38,26 +39,30 @@ body {
 /* ── Navbar favourites button ── */
 .navbar .btn {
   font-size: 1.2rem;
-  color: #FFFFFF;
+  color: #e7e6e6;
   border: none;
+  transition: all 0.4s ease, border-bottom 0.4s ease !important;
 }
 .navbar .btn:hover {
-  background-color: #FFD700;
+  background-color: transparent;
   color: #05070F;
+  border-bottom: 2px solid #05070F;
+  border-radius: 0 !important;
+  transition: all 0.4s ease;
 }
 
 /* ── Rounded search elements ── */
-.form-control, .form-select, .btn {
+.form-control, .form-select {
   border-radius: 50px !important;
 }
 
 
 /* ── Empty state message ── */
 .empty-state {
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: #E9E9E9;
-  padding: 4rem 1rem;
+  font-size: 1rem;
+  font-weight: 300 !important;
+  color: #e7e6e6;
+  padding: 3rem 1rem;
   letter-spacing: 0.02em;
 }
 /* ── Skeleton loading ── */
@@ -87,29 +92,42 @@ body {
   100% { background-position: -200% 0; }
 }
 
-
-
-/* ── Media type dropdown button ── */
-.btn-secondary {
-  background-color: #282828;
+/* ── Media type dropdown trigger button ── */
+.btn-flat {
+  background: none !important;
   border: none;
-  color: #FFFFFF;
-  min-width: 150px;
+  border-bottom: 2px solid transparent;
+  border-radius: 0 !important;
+  color: #e7e6e6;
+  font-weight: 300;
+  padding:0.4rem 0.75rem;
 }
-
+.btn-flat:hover, .btn-flat.show {
+  background-color:none; 
+  border-bottom: 1px solid #FFFFFF;
+  color: #e8e2e2;
+  box-shadow: none !important;
+}
 /* ── Dropdown menu ── */
 .dropdown-menu {
-  background-color: #282828;
-  border: none;
+  background-color: #1C1C1C;
+  border: none !important;
+  border-radius: 12px;
+  padding:0.5rem;
+  box-shadow: none !important;
 }
 
 .dropdown-item {
-  color: var(--text);
+  color: #e7e6e6;
+  font-weight: 200 !important;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
 }
 
 .dropdown-item:hover {
-  background-color: var(--accent);
-  color: var(--text);
+  background-color: #282828;
+  color: #e7e6e6;
 }
 /* ── Media Cards ── */
 
@@ -120,6 +138,7 @@ body {
 }
 
 .card {
+  position: relative;
   background-color: #181818;
   border: none;
   color: var(--text);
@@ -163,9 +182,9 @@ body {
 /* ── Inputs ── */
 .form-control, .form-select {
   background-color: #282828 !important;
-  border: none;
+  border: none !important;
   color: var(--text);
-  color: #FFFFFF !important;
+  color: #e7e6e6 !important;
 }
 .form-control:hover, .form-select:hover {
   background-color: #232324 !important;
@@ -178,23 +197,26 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-
-/* ── Search button ── */
-
 .btn-primary {
-  background-color: #282828 !important;
+  background: none;
   border: none;
-  min-width: 250px;
+  border-bottom: 2px solid transparent;
+  border-radius: 0 !important;
+  color: #FFFFFF;
+  font-weight: 300;
+  padding: 0.4rem 0.75rem;
+  min-width: auto;
 }
 
 .btn-primary:hover {
-  background-color: var(--accent);
-  border-color: #535353;
-
+  background: none;
+  border-bottom: 1px solid #e7e6e6;
+  color: #e7e6e6;
+  box-shadow: none !important;
 }
 /* ── Favourite button ── */
 .btn-fav {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   padding: 4px 10px;
   border-color: #FFD700;
   color: #FFD700;
@@ -235,21 +257,31 @@ body {
 /* ── Favourites Panel (desktop) ── */
 .favourites-panel {
   background: #181818;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
   border-left: 1px solid var(--accent);
-  border-radius: 16px;
+  border: radius 0;;
   padding: 1.5rem;
   transition: filter 0.3s ease;
 }
 
 .favourites-panel:hover {
   /*box-shadow: 0 0 20px rgba(42, 84, 255, 0.4); */
-  border-color: var(--accent);
   filter: brightness(1.1);
 }
 /* audio player */
-
+/* ── Preview badge ── */
+.preview-badge {
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  background: rgba(0,0,0,0.6);
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+}
 .audio-player {
   position: fixed;
   bottom: 0;
@@ -345,9 +377,11 @@ body {
   flex: 1;
   padding-bottom: 14rem;
 }
-/* ── Footer ── 
-.footer {
-  position: fixed;
+/* ── Footer ── */
+.footer { 
+  font-size: 0.83rem;
+}
+  /*position: fixed;
   bottom: 5rem;
   width: 100%;
   color: #FFFFFF;

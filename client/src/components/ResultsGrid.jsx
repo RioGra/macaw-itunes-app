@@ -23,7 +23,7 @@ if (loading) return (
 	if (results.length === 0 && !hasSearched)
 		return (
 			<p className="text-center empty-state">
-				Discover Music, Movies, Podcasts, Audiobooks and more...
+				Discover Music, Movies, Podcasts,<br />Audiobooks and more...
 			</p>
 		);
 	if (results.length === 0 && hasSearched)
