@@ -7,17 +7,19 @@ function MediaCard({ item, onAddFavourite, isFavourite, onPlay }) {
 			{/* Album cover image */}
 			<img
 				src={item.albumCover}
-				alt={item.albumName || item.artistName || 'Album artwork'}
-			
+				alt={item.albumName || item.artistName || "Album artwork"}
 				className="card-img-top"
 			/>
-{/* Preview play button — only shown if preview is available */}
-{item.previewUrl && (
-  <div className="preview-badge" onClick={() => onPlay(item)}>
-    <i className="bi bi-play-circle-fill"></i>
-    <span>Preview</span>
-  </div>
-)}
+			{/* Media Card Preview play button — only shown if preview is available */}
+			{item.previewUrl && (
+				<div
+					className="media-card-preview-btn"
+					onClick={() => onPlay(item)}
+				>
+					<i className="bi bi-play-circle-fill"></i>
+					<span>Preview</span>
+				</div>
+			)}
 			<div className="card-body d-flex flex-column">
 				{/* Track and album info */}
 				<p className="card-artist">{item.artistName}</p>

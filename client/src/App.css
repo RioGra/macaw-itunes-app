@@ -1,4 +1,4 @@
-/* ── CSS Variables ── */
+/* ── CSS CUSTOM PROPERTIES ── */
 :root {
 	--bg-main: #121212;
 	--bg-navbar: #2133bb;
@@ -7,7 +7,7 @@
 	--text: #e7e6e6;
 }
 
-/* ── Global ── */
+/* ── GLOBAL STYLES ── */
 * {
 	font-family: "Inter", sans-serif;
 	box-sizing: border-box;
@@ -24,28 +24,31 @@ body {
 	min-height: 100vh;
 	margin: 0;
 }
+button, a, .media-card-preview-btn, .audio-player__close, .audio-player__btn {
+	cursor: pointer;
+}
 
-/* ── Navbar ── */
+/* ── NAVBAR STYLES ── */
 .navbar {
 	background-color: var(--bg-main) !important;
-  border-bottom: 2px solid var(--accent);
+	border-bottom: 2px solid var(--accent);
 }
+
 .navbar .container-fluid {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
-/* ── Navbar favourites button ── */
+/* ── Navbar Favourites Button ── */
 .navbar .btn {
 	font-size: 1rem;
 	color: #e7e6e6;
 	border: none;
-	transition:
-		all 0.4s ease,
-		border-bottom 0.4s ease !important;
+	transition: all 0.4s ease,
+	border-bottom 0.4s ease !important;
 }
 .navbar .btn i {
-  color: #FFD700;
-  font-size: 1rem;
+	color: #FFD700;
+	font-size: 1rem;
 }
 .navbar .btn:hover {
 	background-color: transparent;
@@ -54,28 +57,99 @@ body {
 	transition: all 0.4s ease;
 }
 
-.search-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.form-control {
-  padding-left: 2.5rem;
-}
-/* ── Rounded search elements ── */
+/* ── SEARCH BAR STYLES ── */
 .form-control,
 .form-select {
+	background-color: #282828 !important;
+	border: none !important;
+	color: #e7e6e6 !important;
 	border-radius: 50px !important;
+	padding-left: 2.5rem;
+	min-width: 250px;
 }
-button, a, .preview-badge, .audio-player__close, .audio-player__btn {
-  cursor: pointer;
+
+.form-control:hover,
+.form-select:hover {
+	background-color: #232324 !important;
+	color: var(--text) !important;
 }
-/* ── Empty state message ── */
+
+.form-control::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+/* Search Submit Button */
+.btn-primary {
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+	border-radius: 0 !important;
+	color: #ffffff;
+	font-weight: 300;
+	padding: 0.4rem 0.75rem;
+	min-width: auto;
+}
+
+.btn-primary:hover {
+	background: none;
+	border-bottom: 1px solid #e7e6e6;
+	color: #e7e6e6;
+	box-shadow: none !important;
+}
+
+/* ── iTunes Search icon ── */
+.search-icon {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--muted);
+	pointer-events: none;
+	z-index: 1;
+}
+
+
+/* ── MEDIA TYPE DROPDOWN TRIGGER BUTTON ── */
+.btn-flat {
+	background: none !important;
+	border: none;
+	border-bottom: 2px solid transparent;
+	border-radius: 0 !important;
+	color: #e7e6e6;
+	font-weight: 300;
+	padding: 0.4rem 0.75rem;
+}
+.btn-flat:hover,
+.btn-flat.show {
+	background: none;
+	border-bottom: 1px solid #ffffff;
+	color: #e8e2e2;
+	box-shadow: none !important;
+}
+
+/* ── DROPDOWN MENU ── */
+.dropdown-menu {
+	background-color: #1c1c1c;
+	border: none !important;
+	border-radius: 12px;
+	padding: 0.5rem;
+	box-shadow: none !important;
+}
+
+.dropdown-item {
+	color: #e7e6e6;
+	font-weight: 200 !important;
+	font-size: 0.85rem;
+	border-radius: 8px;
+	padding: 0.6rem 1rem;
+}
+
+.dropdown-item:hover {
+	background-color: #282828;
+	color: #e7e6e6;
+}
+
+/* ── EMPTY STATE MESSAGE ── */
 .empty-state {
 	font-size: 1rem;
 	font-weight: 300 !important;
@@ -83,7 +157,8 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	padding: 3rem 1rem;
 	letter-spacing: 0.02em;
 }
-/* ── Skeleton loading ── */
+
+/* ── SKELETON LOADING ── */
 .skeleton {
 	background: linear-gradient(90deg, #0d1117 25%, #1a1f2e 50%, #0d1117 75%);
 	background-size: 200% 100%;
@@ -114,52 +189,13 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	}
 }
 
-/* ── Media type dropdown trigger button ── */
-.btn-flat {
-	background: none !important;
-	border: none;
-	border-bottom: 2px solid transparent;
-	border-radius: 0 !important;
-	color: #e7e6e6;
-	font-weight: 300;
-	padding: 0.4rem 0.75rem;
-}
-.btn-flat:hover,
-.btn-flat.show {
-	background-color: none;
-	border-bottom: 1px solid #ffffff;
-	color: #e8e2e2;
-	box-shadow: none !important;
-}
-/* ── Dropdown menu ── */
-.dropdown-menu {
-	background-color: #1c1c1c;
-	border: none !important;
-	border-radius: 12px;
-	padding: 0.5rem;
-	box-shadow: none !important;
-}
 
-.dropdown-item {
-	color: #e7e6e6;
-	font-weight: 200 !important;
-	font-size: 0.85rem;
-	border-radius: 8px;
-	padding: 0.6rem 1rem;
-}
-
-.dropdown-item:hover {
-	background-color: #282828;
-	color: #e7e6e6;
-}
-/* ── Media Cards ── */
-
+/* ── MEDIA CARDS STYLES ── */
 .card-img-top {
 	width: 100%;
 	aspect-ratio: 1/1;
 	object-fit: cover;
 }
-
 .card {
 	position: relative;
 	background-color: #181818;
@@ -169,11 +205,9 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	margin: 0 auto;
 	overflow: hidden;
 	border-radius: 16px !important;
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease;
+	transition: transform 0.2s ease,
+	box-shadow 0.2s ease;
 }
-
 .card:hover {
 	transform: translateY(-6px);
 	box-shadow:
@@ -188,62 +222,23 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	color: var(--text) !important;
 	margin-bottom: 4px;
 }
-
 .card-artist {
 	font-size: 0.85rem;
 	font-weight: 500;
 	color: var(--text) !important;
 	margin-bottom: 2px;
 }
-
 .card-album {
 	font-size: 0.78rem;
 	color: #8899cc !important;
 	margin-bottom: 2px;
 }
-
 .card-year {
 	font-size: 0.75rem;
 	color: #8899cc !important;
 }
-/* ── Inputs ── */
-.form-control,
-.form-select {
-	background-color: #282828 !important;
-	border: none !important;
-	color: var(--text);
-	color: #e7e6e6 !important;
-}
-.form-control:hover,
-.form-select:hover {
-	background-color: #232324 !important;
-	color: var(--text) !important;
-}
-.form-control {
-	min-width: 250px;
-}
-.form-control::placeholder {
-	color: rgba(255, 255, 255, 0.5);
-}
 
-.btn-primary {
-	background: none;
-	border: none;
-	border-bottom: 2px solid transparent;
-	border-radius: 0 !important;
-	color: #ffffff;
-	font-weight: 300;
-	padding: 0.4rem 0.75rem;
-	min-width: auto;
-}
-
-.btn-primary:hover {
-	background: none;
-	border-bottom: 1px solid #e7e6e6;
-	color: #e7e6e6;
-	box-shadow: none !important;
-}
-/* ── Favourite button ── */
+/* ── Media Card Favourite Button ── */
 .btn-fav {
 	font-size: 0.65rem;
 	padding: 4px 10px;
@@ -255,12 +250,15 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	background-color: #ffd700;
 	color: #05070f;
 }
-/* ── Icon spacing ── */
+
+/* ── Icon Spacing ── */
 .btn i,
 .navbar i {
 	margin-right: 6px;
 }
-/* ── Favourites Drawer MOBILE ── */
+
+
+/* ── FAVOURITES DRAWER MOBILE ── */
 .offcanvas {
 	background: rgba(5, 7, 15, 0.85);
 	/*background: linear-gradient(135deg, rgba(5, 7, 15, 0.92), rgba(42, 84, 255, 0.08));*/
@@ -270,49 +268,34 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	box-shadow: -4px 0 30px rgba(42, 84, 225, 0.5);
 	color: var(--text);
 }
-
 .offcanvas img {
 	border-radius: 8px;
 }
-
-/* ── Favourites remove button ── */
+/* ── Favourites Remove Button ── */
 .btn-drawer-close {
 	color: #ffd700;
 }
-
 .btn-drawer-close:hover {
 	box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 	background-color: #ffd700;
 	color: var(--bg-main);
 }
-/* ── Favourites Panel (desktop) ── */
+
+
+/* ── FAVOURITES PANEL (Desktop) ── */
 .favourites-panel {
 	background: #181818;
 	border-left: 1px solid var(--accent);
-	border: radius 0;
+	border-radius: 0;
 	padding: 1.5rem;
 	transition: filter 0.3s ease;
 }
-
 .favourites-panel:hover {
-	/*box-shadow: 0 0 20px rgba(42, 84, 255, 0.4); */
 	filter: brightness(1.1);
 }
-/* audio player */
-/* ── Preview badge ── */
-.preview-badge {
-	bottom: 0.75rem;
-	right: 0.75rem;
-	display: flex;
-	align-items: center;
-	gap: 0.6rem;
-	cursor: pointer;
-	background: rgba(0, 0, 0, 0.6);
-	padding: 0.3rem 0.6rem;
-	border-radius: 20px;
-	font-size: 0.85rem;
-	color: #ffffff;
-}
+
+
+/* ── AUDIO PLAYER ── */
 .audio-player {
 	position: fixed;
 	bottom: 0;
@@ -396,7 +379,22 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	margin: 0;
 	padding-bottom: 2px;
 }
-/* app wrapper and main content */
+/* ── Media Card - Preview Button── */
+.media-card-preview-btn {
+	bottom: 0.75rem;
+	right: 0.75rem;
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	cursor: pointer;
+	background: rgba(0, 0, 0, 0.6);
+	padding: 0.3rem 0.6rem;
+	border-radius: 20px;
+	font-size: 0.85rem;
+	color: #ffffff;
+}
+
+/* ── APP WRAPPER AND MAIN CONTENT ── */
 .app-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -407,14 +405,9 @@ button, a, .preview-badge, .audio-player__close, .audio-player__btn {
 	flex: 1;
 	padding-bottom: 14rem;
 }
-/* ── Footer ── */
+
+/* ── FOOTER ── */
 .footer {
 	font-size: 0.83rem;
 }
-/*position: fixed;
-  bottom: 5rem;
-  width: 100%;
-  color: #FFFFFF;
-  font-size: 1.1rem;
-  padding: 0.4rem 1rem;
-  z-index: 997;*/
+
