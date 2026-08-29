@@ -17,34 +17,54 @@ function SearchBar({ onSearch }) {
 				onSubmit={handleSubmit}
 				className="d-flex gap-2 flex-wrap"
 			>
-				{/* Search input */}
-				<input
-					type="text"
-					className="form-control"
-					placeholder="Search iTunes..."
-					value={term}
-					onChange={(e) => setTerm(e.target.value)}
-				/>
-{/* Media type custom dropdown */}
-<div className="dropdown">
-  <button
-    className="btn btn-flat dropdown-toggle"
-    type="button"
-    data-bs-toggle="dropdown"
-  >
-    {media === 'all' ? 'All' : media.charAt(0).toUpperCase() + media.slice(1)}
-  </button>
-  <ul className="dropdown-menu dropdown-menu-dark">
-    {['all','music','movie','podcast','audiobook','shortFilm','tvShow','software','ebook'].map((type) => (
-      <li key={type}>
-        <button className="dropdown-item" type="button" onClick={() => setMedia(type)}>
-          {type.charAt(0).toUpperCase() + type.slice(1)}
-        </button>
-      </li>
-    ))}
-  </ul>
-</div>
-				
+				{/* Search input with icon */}
+				<div className="input-group flex-grow-1">
+					<i className="bi bi-search search-icon"style={{ color: 'var(--muted)' }}></i>
+			
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Search iTunes..."
+						value={term}
+						onChange={(e) => setTerm(e.target.value)}
+					/>
+				</div> {/* End of search-input-wrapper */}
+				{/* Media type custom dropdown */}
+				<div className="dropdown">
+					<button
+						className="btn btn-flat dropdown-toggle"
+						type="button"
+						data-bs-toggle="dropdown"
+					>
+						{media === "all"
+							? "All"
+							: media.charAt(0).toUpperCase() + media.slice(1)}
+					</button>
+					<ul className="dropdown-menu dropdown-menu-dark">
+						{[
+							"all",
+							"music",
+							"movie",
+							"podcast",
+							"audiobook",
+							"shortFilm",
+							"tvShow",
+							"software",
+							"ebook",
+						].map((type) => (
+							<li key={type}>
+								<button
+									className="dropdown-item"
+									type="button"
+									onClick={() => setMedia(type)}
+								>
+									{type.charAt(0).toUpperCase() + type.slice(1)}
+								</button>
+							</li>
+						))}
+					</ul>
+				</div>
+
 				{/* <select
 					className="form-select"
 					value={media}

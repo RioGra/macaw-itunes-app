@@ -84,6 +84,7 @@ const handlePlay = (track) => {
           <FavouritesPanel
             favourites={favourites}
             onRemoveFavourite={removeFavourite}
+			onPlay={handlePlay}
           />
         </div>
       </div>
@@ -95,6 +96,7 @@ const handlePlay = (track) => {
 					onRemoveFavourite={removeFavourite}
 					show={showDrawer}
 					onClose={() => setShowDrawer(false)}
+					onPlay={handlePlay}
 				/>
 			</div>
 	

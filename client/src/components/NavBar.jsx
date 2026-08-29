@@ -8,7 +8,7 @@ function NavBar({ favouriteCount, onToggleDrawer }) {
 				{/* App logo/title */}
 				<span className="navbar-brand fw-bold">
 				 MACAW<img src={macawLogo} alt="Macaw Logo"
-					 width="45" height="45" className="ms-2" style={{borderRadius: '50%', objectFit: 'cover', border: '3px solid #FFD700'}}/>
+					 width="49" height="49" className="ms-2" style={{borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #FFD700'}}/>
 					</span> 
 				{/* Favourites button with badge count */}
 				<button
