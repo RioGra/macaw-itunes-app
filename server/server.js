@@ -13,7 +13,7 @@ if (!process.env.JWT_SECRET) {
 }
 const app = express(); //Create Express app instance
 
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"] })); // Allow request from React frontend
+app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174","https://macaw-client.onrender.com"] })); // Allow request from React frontend
 app.use(express.json()); // Parse incoming JSON requests
 
 app.get("/", (req, res) => {
