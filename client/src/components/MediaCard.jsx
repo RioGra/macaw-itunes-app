@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-//Display a single media card with add/remove favourite button
+// Display a single media card with add/remove favourite button
 function MediaCard({ item, onAddFavourite, isFavourite, onPlay }) {
 	return (
 		<div className="card h-100">

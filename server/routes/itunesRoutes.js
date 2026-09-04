@@ -3,7 +3,7 @@ import searchItunes from "../controllers/searchController.js"; // Will make call
 
 const router = express.Router(); // Creates a mini Express app instance for routing
 
-//GET /api/itunes/search?term=...&media=all&limit=(default limit 25)
+// GET /api/itunes/search?term=...&media=all&limit=(default limit 25)
 router.get("/search", searchItunes);
 
 export default router;

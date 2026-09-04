@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-//Fixed bottom audio player for 30s iTunes previews
 
+// Fixed bottom audio player for 30s iTunes previews
 function AudioPlayer({ currentTrack, onClose }) {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
@@ -24,7 +24,6 @@ function AudioPlayer({ currentTrack, onClose }) {
 		}
 		setIsPlaying(!isPlaying);
 	};
-
 	// Update current time as the audio plays
 	const handleTimeUpdate = () => {
 		setCurrentTime(Math.floor(audioRef.current.currentTime));
@@ -35,6 +34,7 @@ function AudioPlayer({ currentTrack, onClose }) {
 		setIsPlaying(false);
 		setCurrentTime(0);
 	};
+
 	if (!currentTrack) return null;
 
 	return (
@@ -45,24 +45,23 @@ function AudioPlayer({ currentTrack, onClose }) {
 				onEnded={handleEnded}
 			/>
 			<div className="audio-player__row">
-				{/*Artwork */}
+				{/* Artwork */}
 				<img
 					src={currentTrack.albumCover}
 					alt={currentTrack.trackName}
 					className="audio-player__artwork"
 				/>
-
-				{/*Track Info */}
+				{/* Track Info */}
 				<div className="audio-player__info">
 					<p className="audio-player__track">
 						{currentTrack.trackName || currentTrack.albumName}
 					</p>
 					<p className="audio-player__artist">
-						{currentTrack.artistName} . 30s preview
+						{currentTrack.artistName} •30s preview
 					</p>
 				</div>
 
-				{/*Controls */}
+				{/* Controls */}
 				<div className="audio-player__controls">
 					<button
 						className="audio-player__btn"
@@ -78,12 +77,19 @@ function AudioPlayer({ currentTrack, onClose }) {
 					</span>
 				</div>
 
-				{/*Close*/}
-				<i
-					className="bi bi-x-lg audio-player__close"
+				{/* Close */}
+				<button
+					type="button"
+					className="audio-player__close"
 					onClick={onClose}
-					aria-label="Close"
-				></i>
+					aria-label="Close audio plYER
+				"
+				>
+					<i
+						className="bi bi-x-lg"
+						aria-label="true"
+					></i>
+				</button>
 				{/* iTunes badge — required by API terms of use */}
 				<a
 					href="https://www.apple.com/itunes/"

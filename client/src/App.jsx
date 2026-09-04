@@ -37,7 +37,7 @@ function App() {
 
 	// Function to add an item to favourites, preventing duplicates
 	const addFavourite = (item) => {
-		//prevent duplicates
+		// Prevent duplicates
 		if (!favourites.some((fav) => fav.trackId === item.trackId)) {
 			setFavourites([...favourites, item]);
 		}
@@ -47,10 +47,10 @@ function App() {
 		setFavourites(favourites.filter((fav) => fav.trackId !== trackId));
 	};
 
-// Sets the current track to play — clicking same track toggles play/pause
-const handlePlay = (track) => {
-  setCurrentTrack(track)
-}
+	// Sets the current track to play — clicking same track toggles play/pause
+	const handlePlay = (track) => {
+		setCurrentTrack(track);
+	};
 
 	// Render the main App component
 	return (
@@ -59,55 +59,55 @@ const handlePlay = (track) => {
 				favouriteCount={favourites.length}
 				onToggleDrawer={() => setShowDrawer(true)}
 			/>
-			 <main className="app-main">
-			<SearchBar onSearch={handleSearch} />
-			{error && (
-				<div className="error-state text-center">
-					<i className="bi bi-exclamation-triangle-fill"></i> {error}
+			<main className="app-main">
+				<SearchBar onSearch={handleSearch} />
+				{error && (
+					<div className="error-state text-center">
+						<i className="bi bi-exclamation-triangle-fill"></i> {error}
+					</div>
+				)}
+				<div className="container-fluid px-3">
+					<div className="row g-3 px-3">
+						{/* Results grid — full width on mobile, 8 cols on desktop */}
+						<div className="col-12 col-lg-8">
+							<ResultsGrid
+								results={results}
+								loading={loading}
+								onAddFavourite={addFavourite}
+								favourites={favourites}
+								hasSearched={hasSearched}
+								onPlay={handlePlay}
+							/>
+						</div>
+						{/* Favourites panel — desktop only */}
+						<div className="col-lg-4 d-none d-lg-block">
+							<FavouritesPanel
+								favourites={favourites}
+								onRemoveFavourite={removeFavourite}
+								onPlay={handlePlay}
+							/>
+						</div>
+					</div>
 				</div>
-			)}
-			<div className="container-fluid px-3">
-      <div className="row g-3 px-3">
-        {/* Results grid — full width on mobile, 8 cols on desktop */}
-        <div className="col-12 col-lg-8">
-          <ResultsGrid
-            results={results}
-            loading={loading}
-            onAddFavourite={addFavourite}
-            favourites={favourites}
-            hasSearched={hasSearched}
-			onPlay={handlePlay}
-          />
-        </div>
-		   {/* Favourites panel — desktop only */}
-        <div className="col-lg-4 d-none d-lg-block">
-          <FavouritesPanel
-            favourites={favourites}
-            onRemoveFavourite={removeFavourite}
-			onPlay={handlePlay}
-          />
-        </div>
-      </div>
-    </div>
-			{/* Favourites drawer - mobile only */}
-			<div className="d-lg-none">
-				<FavouritesDrawer
-					favourites={favourites}
-					onRemoveFavourite={removeFavourite}
-					show={showDrawer}
-					onClose={() => setShowDrawer(false)}
-					onPlay={handlePlay}
-				/>
-			</div>
-	
+				{/* Favourites drawer - mobile only */}
+				<div className="d-lg-none">
+					<FavouritesDrawer
+						favourites={favourites}
+						onRemoveFavourite={removeFavourite}
+						show={showDrawer}
+						onClose={() => setShowDrawer(false)}
+						onPlay={handlePlay}
+					/>
+				</div>
 			</main>
-{!currentTrack && <Footer />}
-		
-								<AudioPlayer
-  currentTrack={currentTrack}
-  onClose={() => setCurrentTrack(null)}
-/>
-	</div>
+			{/* Show footer only when no track is playing */}
+			{!currentTrack && <Footer />}
+			{/* Fixed bottom audio player — renders when a track is selected */}.
+			<AudioPlayer
+				currentTrack={currentTrack}
+				onClose={() => setCurrentTrack(null)}
+			/>
+		</div>
 	);
 }
 export default App;

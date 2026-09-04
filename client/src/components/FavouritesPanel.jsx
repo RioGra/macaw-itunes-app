@@ -1,8 +1,9 @@
-// Desktop-only favourites side panel (visible on lg screens and above)
+// DESKTOP-only: favourites side panel (visible on lg screens and above)
 
 function FavouritesPanel({ favourites, onRemoveFavourite, onPlay }) {
 	return (
 		<div className="favourites-panel">
+			{/* Panel header — heart icon and favourites count */}
 			<p
 				className="mb-4"
 				style={{ fontWeight: "400" }}
@@ -14,6 +15,7 @@ function FavouritesPanel({ favourites, onRemoveFavourite, onPlay }) {
 				Favourites<span className="ms-2">{favourites.length}</span>
 			</p>
 
+			{/* Render empty state or list of favourites */}
 			{favourites.length === 0 ? (
 				<p
 					className="text-center empty-state"
@@ -29,6 +31,7 @@ function FavouritesPanel({ favourites, onRemoveFavourite, onPlay }) {
 						onClick={() => item.previewUrl && onPlay(item)}
 						style={{ cursor: item.previewUrl ? "pointer" : "default" }}
 					>
+						{/* Favourite item — click row to preview, X to remove */}
 						<img
 							src={item.albumCover}
 							alt={item.albumName || item.artistName || "Album artwork"}
@@ -53,6 +56,8 @@ function FavouritesPanel({ favourites, onRemoveFavourite, onPlay }) {
 								{item.artistName}
 							</p>
 						</div>
+
+						{/* Remove favourite — X icon */}
 						<i
 							className="bi bi-x-lg"
 							onClick={() => onRemoveFavourite(item.trackId)}

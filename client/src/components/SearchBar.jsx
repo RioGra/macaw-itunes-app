@@ -19,8 +19,7 @@ function SearchBar({ onSearch }) {
 			>
 				{/* Search input with icon */}
 				<div className="input-group flex-grow-1">
-					<i className="bi bi-search search-icon"style={{ color: 'var(--muted)' }}></i>
-			
+					<i className="bi bi-search search-icon" style={{ color: 'var(--muted)' }}></i>
 					<input
 						type="text"
 						className="form-control"
@@ -28,7 +27,8 @@ function SearchBar({ onSearch }) {
 						value={term}
 						onChange={(e) => setTerm(e.target.value)}
 					/>
-				</div> {/* End of search-input-wrapper */}
+				</div> {/* End of search-input */}
+
 				{/* Media type custom dropdown */}
 				<div className="dropdown">
 					<button
@@ -40,6 +40,7 @@ function SearchBar({ onSearch }) {
 							? "All"
 							: media.charAt(0).toUpperCase() + media.slice(1)}
 					</button>
+					{/* Render each media type as a dropdown item */}
 					<ul className="dropdown-menu dropdown-menu-dark">
 						{[
 							"all",
@@ -64,22 +65,6 @@ function SearchBar({ onSearch }) {
 						))}
 					</ul>
 				</div>
-
-				{/* <select
-					className="form-select"
-					value={media}
-					onChange={(e) => setMedia(e.target.value)}
-				>
-					<option value="all">All</option>
-					<option value="music">Music</option>
-					<option value="movie">Movie</option>
-					<option value="podcast">Podcast</option>
-					<option value="audiobook">Audiobook</option>
-					<option value="shortFilm">Short Film</option>
-					<option value="tvShow">TV Show</option>
-					<option value="software">Software</option>
-					<option value="ebook">Ebook</option>
-				</select> */}
 
 				{/* Search button */}
 				<button
