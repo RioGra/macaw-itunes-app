@@ -200,6 +200,7 @@ itunes-app/
 Mobile and Desktop application wireframes are included in [wireframes.pdf](wireframes.pdf).
 
 ## Live Demo
+[Open the live MACAW application](https://macaw-client.onrender.com/)
 
 ## 🎨 Design Philosophy
 
