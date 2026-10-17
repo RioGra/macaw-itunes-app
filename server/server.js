@@ -7,13 +7,24 @@ import verifyToken from "./middleware/authMiddleware.js"; // Import the token ve
 
 dotenv.config(); // Load environment variables from .env
 
+// Token lifetime in seconds (1 hour)
+const TOKEN_LIFETIME_SECONDS = 3600;
+
 // Prevent server from starting without JWT_SECRET key
 if (!process.env.JWT_SECRET) {
 	throw new Error("JWT_SECRET must be defined in .env");
 }
 const app = express(); //Create Express app instance
 
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"] })); // Allow request from React frontend
+app.use(
+	cors({
+		origin: [
+			"http://localhost:5173",
+			"http://localhost:5174",
+			"https://macaw-client.onrender.com",
+		],
+	}),
+); // Allow request from React frontend
 app.use(express.json()); // Parse incoming JSON requests
 
 app.get("/", (req, res) => {
@@ -24,9 +35,9 @@ app.get("/", (req, res) => {
 // This token will be used to access the iTunes API routes
 app.post("/api/token", (req, res) => {
 	const token = jwt.sign({ client: "itunes-app" }, process.env.JWT_SECRET, {
-		expiresIn: "1h",
+		expiresIn: TOKEN_LIFETIME_SECONDS,
 	});
-	res.json({ token });
+	res.json({ token, expiresIn: TOKEN_LIFETIME_SECONDS });
 });
 
 // iTunes route protected: - valid JWT token required on every request to access the iTunes API
