@@ -22,9 +22,13 @@ const verifyToken = (req, res, next) => {
 		// Proceed to the protected route
 		next();
 	} catch (err) {
-		// If token is invalid or expired, return a forbidden response
-		return res.status(403).json({ message: "Invalid token" });
-	}
+		// Handle token verification errors
+		if (err.name === "TokenExpiredError") {
+			return res.status(401).json({ message: "Session expired. Please start a new session.", code: "TOKEN_EXPIRED" });
+		}
+		// If token is invalid, return a forbidden response
+		return res.status(403).json({ message: "Invalid token", code: "TOKEN_INVALID" });
+	}	
 };
 
 // Export the middleware to be used in other parts of the application
