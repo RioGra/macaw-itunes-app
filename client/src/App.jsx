@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import searchItunes from "./services/api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -10,10 +10,38 @@ import FavouritesPanel from "./components/FavouritesPanel";
 import AudioPlayer from "./components/AudioPlayer";
 import Footer from "./components/Footer";
 
+// Local storage key for favourites
+const MACAW_FAVOURITES_KEY = "macaw-favourites";
+
 // Main App component
 function App() {
 	const [results, setResults] = useState([]); // search results - starts empty
-	const [favourites, setFavourites] = useState([]); // saved favourites - starts empty
+	// Load saved favourites from local storage on first render
+	const [favourites, setFavourites] = useState(() => {
+		try {
+			const saved = localStorage.getItem(MACAW_FAVOURITES_KEY);
+			if (saved) {
+				const parsed = JSON.parse(saved);
+				if (Array.isArray(parsed)) {
+					return parsed.filter(item => item && item.trackId);
+				}
+			}
+		} catch {
+			// Corrupt or unreadable data- fall back to an empty list
+		}
+		return [];
+	});
+
+
+	// Save favourites to local storage whenever they change
+	useEffect(() => {
+		try {
+			localStorage.setItem(MACAW_FAVOURITES_KEY, JSON.stringify(favourites));
+		} catch {
+			// Storage full or unavailable - ignore  so app doesn't crash
+		}
+	}, [favourites]);
+
 	const [loading, setLoading] = useState(false); // is a search in progress?
 	const [error, setError] = useState(null); // did something go wrong during search ?
 	const [showDrawer, setShowDrawer] = useState(false); // is the favourites drawer open?
