@@ -23,7 +23,7 @@ function App() {
 			if (saved) {
 				const parsed = JSON.parse(saved);
 				if (Array.isArray(parsed)) {
-					return parsed.filter(item => item && item.trackId);
+					return parsed.filter((item) => item && item.trackId);
 				}
 			}
 		} catch {
@@ -31,7 +31,6 @@ function App() {
 		}
 		return [];
 	});
-
 
 	// Save favourites to local storage whenever they change
 	useEffect(() => {
@@ -57,7 +56,13 @@ function App() {
 			setResults(data);
 			setHasSearched(true);
 		} catch (error) {
-			setError("Something went wrong. Please try again.");
+			if (error.response?.data?.code === "TOKEN_EXPIRED") {
+				setError(
+					"Your session has expired. Please search again to start a new session.",
+				);
+			} else {
+				setError("Something went wrong. Please try again.");
+			}
 		} finally {
 			setLoading(false);
 		}
