@@ -7,11 +7,13 @@ const API_URL = "http://localhost:5001";
 // Cache for JWT token - In memory token cache, reused between searches
 let cachedToken = null;
 let tokenExpiresAt = 0;
+// Refresh the token 60 seconds before it expires
+const TOKEN_REFRESH_BUFFER_MS = 60 * 1000;
 
 // Fetch JWT token from server
 const getToken = async () => {
 	//Reuse the cached token, or fetch a new one if missing or expired
-	if (cachedToken && tokenExpiresAt > Date.now()) {
+	if (cachedToken && Date.now() < tokenExpiresAt - TOKEN_REFRESH_BUFFER_MS) {
 		return cachedToken;
 	}
 	const response = await axios.post(`${API_URL}/api/token`);
@@ -19,7 +21,6 @@ const getToken = async () => {
 	tokenExpiresAt = Date.now() + response.data.expiresIn * 1000;
 	return cachedToken;
 };
-// Removed extra closing brace
 
 //Search iTunes API via Express server (only function that
 // components need to call) React automatically sends the JWT
