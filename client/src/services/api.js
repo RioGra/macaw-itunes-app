@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5001";
-
-//TODO switch back to after updating changes "https://macaw-server.onrender.com";
+const API_URL = "https://macaw-server.onrender.com";
 
 // Cache for JWT token - In memory token cache, reused between searches
 let cachedToken = null;
