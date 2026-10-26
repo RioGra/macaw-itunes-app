@@ -7,9 +7,9 @@ A full-stack web application that allows users to search the iTunes Store and Ap
 - **iTunes Store search** - Search by keyword and media type
 - **Media Cards** - Results displayed with album artwork, artist name, title and release year
 - **30-second Audio Previews** - Play iTunes directly in the app via a fixed bottom player
-- **Favourites List** - Add and remove favourites — displayed in a side panel on desktop, slide-out drawer on mobile
+- **Favourites List** - Add and remove favourites — displayed in a side panel on desktop, slide-out drawer on mobile. Favourites are saved in the browser (localStorage), so they persist after a refresh
 - **Responsive Mobile-First Design** - Built with Bootstrap, optimised for all screen sizes
-- **JWT-Secured API** - All search requests authorised with JSON Web Tokens
+- **JWT-Secured API** - All search requests authorised with JSON Web Tokens, with automatic token refresh
 - **Accessible UI** - Lighthouse accessibility score 18/18
 - **Loading Skeleton** - Animated skeleton cards shown during API Calls
 
@@ -56,7 +56,6 @@ A full-stack web application that allows users to search the iTunes Store and Ap
 ```
 
 Use your own secret value. Do not commit the `.env` file to Git.
-
 
 3. Start the server from the `server` folder:
 
@@ -150,6 +149,7 @@ Favourites
 1. Click Add to Favourites on any card
 2. View saved favourites via the Favourites button in the navbar
 3. Remove items by clicking the X icon
+4. Favourites are saved on that browser and device, and persist between visits
 
 ## 📂 Project Structure
 
@@ -174,7 +174,7 @@ itunes-app/
 | | | |-- SearchBar.jsx
 | | |
 | | |-- services/
-| | | |-- api.js _ JWT token fetch and iTunes API
+| | | |-- api.js _ JWT token caching, refresh and iTunes API
 | | |-- tests/ _ Vitest unit tests
 | | |-- App.jsx _ Root component and state
 | | |-- App.css _ Global styles
@@ -202,6 +202,7 @@ Mobile and Desktop application wireframes are included in [wireframes.pdf](wiref
 
 ## Live Demo
 
+https://macaw-client.onrender.com (may take a minute to load on first visit)
 
 ## 🎨 Design Philosophy
 
@@ -215,18 +216,29 @@ App name - MACAW - Inspired by Hyacinth Macaw encountered during project plannin
 
 ## 🔐 Security
 
-- JWT tokens issued on every session - expire after 1 hour
-- CORS restricted to localhost:5173
+- JWT tokens are issued by the server and expire after 1 hour
+- The client caches the token and refreshes it automatically before it expires
+- If the server reports an expired token, the client gets a new one and retries the search once
+- If the session can't be renewed, a friendly "session expired" message is shown
+- CORS restricted to local development and deployed client addresses
 - Secrets stored in .env - never committed to git
 - Input validation on all API endpoints
 
 ## Browser Support
 
 - Chrome - recommended for development and testing
+- Safari - tested
+
+## 🔄 Improvements from Code Review Feedback
+
+Following feedback from my code reviewer, I made two improvements:
+
+- **Persistent favourites** - favourites are now saved in localStorage, so they remain after a page refresh or when the browser is reopened. Stored data is validated, so corrupt data can't crash the app.
+- **Improved JWT session handling** - the client now caches the token, refreshes it automatically before it expires, retries once if the server reports it expired, and shows a friendly "session expired" message if it can't be renewed.
 
 ## 🚧 Future Enhancements
 
-- Persistent favourites with database storage
+- Favourites synced across devices with user accounts and a database
 - Full desktop split panel with playlist management
 - Search history
 
@@ -240,3 +252,4 @@ Full-Stack Capstone Project - 2026
 - Apple iTunes Search API
 - HyperionDev Bootcamp for project guidance
 - Bootstrap and Bootstrap Icons
+- Code reviewer feedback, which led to persistent favourites (localStorage) and improved JWT session handling
