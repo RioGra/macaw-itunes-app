@@ -37,6 +37,7 @@ app.post("/api/token", (req, res) => {
 	const token = jwt.sign({ client: "itunes-app" }, process.env.JWT_SECRET, {
 		expiresIn: TOKEN_LIFETIME_SECONDS,
 	});
+
 	res.json({ token, expiresIn: TOKEN_LIFETIME_SECONDS });
 });
 
